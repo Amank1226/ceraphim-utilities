@@ -1,0 +1,335 @@
+{
+  "command": [
+    {
+      "name": "User Joins Server",
+      "perms": [],
+      "actions": [
+        {
+          "name": "Welcome Message",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "📩｜welcome",
+          "color": "C7EEFF",
+          "title": "Welcome ${tempVars.newuser.displayName}!",
+          "url": "",
+          "authorname": "Ceraphim Utilities",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "**${tempVars.newuser.displayName}** is our **${dbsVars.guild.memberCount}**th Member.\n\n**Rules :** <#1109811734644015144>\n**Roles :** <#1109811772585689138>\n\nFor any **Support** open a _*Support*_ ticket in <#1113466481217392710>.\n",
+          "thumbnail": "${tempVars.newuser.user.avatarURL}",
+          "image": "https://i.pinimg.com/originals/5e/78/af/5e78affab2547d678e4c5458dd931381.gif",
+          "footer": "",
+          "timestamp": "BOOL_TRUE@@",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        },
+        {
+          "name": "Add Member Role",
+          "category": "User Action",
+          "type": "Add Role to User",
+          "messageActionRows": [],
+          "user": "${tempVars.newuser.id}",
+          "rolename": "╰•★★ Member ★★•╯"
+        },
+        {
+          "name": "Dm Welcome Message",
+          "category": "Message",
+          "type": "Send Direct Message",
+          "messageActionRows": [],
+          "user": "${tempVars.newuser.id}",
+          "messagetext": "**${tempVars.newuser.displayName}** , you are our **${dbsVars.guild.memberCount}**th Member.\n\n**Rules :** <#1109811734644015144>\n**Roles :** <#1109811772585689138>\n\nFor any **Support** open a _*Support*_ ticket in <#1113466481217392710>.\n",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ],
+      "var": {
+        "user": "newuser"
+      }
+    },
+    {
+      "name": "Any Message",
+      "perms": [],
+      "actions": [],
+      "var": {}
+    },
+    {
+      "name": "User Kicked",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "user": "kickuser"
+      }
+    },
+    {
+      "name": "User Banned",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "user": "banuser"
+      }
+    },
+    {
+      "name": "Bot Initialization",
+      "perms": [],
+      "actions": [
+        {
+          "name": "status",
+          "category": "Bot Action",
+          "type": "Set Bot Status",
+          "messageActionRows": [],
+          "presencestatus": "online"
+        },
+        {
+          "name": "activity",
+          "category": "Bot Action",
+          "type": "Set Bot Activity",
+          "messageActionRows": [],
+          "activityname": "Ceraphim's ${dbsVars.guild.memberCount} Members.",
+          "activitytype": "WATCHING",
+          "streamurl": ""
+        },
+        {
+          "name": "Bot Is Online",
+          "category": "Message",
+          "type": "Send Message",
+          "messageActionRows": [],
+          "channelname": "👑｜mod-logs",
+          "messagetext": "Bot Is **Online**.",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ],
+      "var": {}
+    },
+    {
+      "name": "Channel Create",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": "createdchannel"
+      }
+    },
+    {
+      "name": "Channel Delete",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": "deletedchannel"
+      }
+    },
+    {
+      "name": "Channel Pins Update",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": "updatepinschannel"
+      }
+    },
+    {
+      "name": "Channel Update",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": "updatechannel"
+      }
+    },
+    {
+      "name": "Emoji Create",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": "createdemoji"
+      }
+    },
+    {
+      "name": "Emoji Delete",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": "deletedemoji"
+      }
+    },
+    {
+      "name": "Emoji Update",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": "updatedemoji"
+      }
+    },
+    {
+      "name": "Guild Ban Remove",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Guild Create",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Guild Delete",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Guild Member Available",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Guild Member Speaking",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Guild Member Update",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Guild Unavailable",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Guild Update",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Message Delete",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Message Update",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Role Create",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Role Delete",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Role Update",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Typing Start",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "User Update",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Button Interaction",
+      "perms": [],
+      "actions": [
+        {
+          "name": "trialCase",
+          "category": "Control",
+          "type": "Switch Case",
+          "valueActions": {
+            "removeTrial": [
+              {
+                "name": "Remove Trial",
+                "category": "User Action",
+                "type": "Remove Role From User",
+                "messageActionRows": [],
+                "user": "${tempVars.trialUser.id}",
+                "rolename": "Trial Moderator",
+                "reason": "none"
+              },
+              {
+                "name": "Trial Removed Log",
+                "category": "Interaction",
+                "type": "Reply To Interaction With Message",
+                "messageActionRows": [],
+                "interactionobject": "${tempVars.buttoninteraction}",
+                "messagetext": "<@&1123608011378798734> was removed."
+              }
+            ]
+          },
+          "messageActionRows": [],
+          "varname": "${tempVars.buttoninteraction.customId}"
+        }
+      ],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Select Interaction",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Command Interaction",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    }
+  ]
+}

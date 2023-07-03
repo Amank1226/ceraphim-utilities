@@ -1,0 +1,20 @@
+{
+  "enabled": false,
+  "obj": {
+    "warnEnabled": true,
+    "kickEnabled": false,
+    "banEnabled": false,
+    "maxInterval": 10000,
+    "maxDuplicatesInterval": 60000,
+    "warnMessage": "{@user} you have been warned for spamming.",
+    "kickMessage": "kicking",
+    "banMessage": "banning",
+    "warnThreshold": 20,
+    "kickThreshold": 5,
+    "banThreshold": 7,
+    "maxDuplicatesWarning": 20,
+    "maxDuplicatesKick": 7,
+    "maxDuplicatesBan": 12,
+    "debug": true
+  }
+}

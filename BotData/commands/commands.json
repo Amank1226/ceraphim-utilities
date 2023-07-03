@@ -1,0 +1,1021 @@
+{
+  "command": [
+    {
+      "name": "kick",
+      "actions": [
+        {
+          "name": "get user kicked",
+          "category": "Variable",
+          "type": "Get Mentioned User",
+          "messageActionRows": [],
+          "varname": "kickUser",
+          "vartype": "User",
+          "savevartype": "temp"
+        },
+        {
+          "name": "Check kick Perms",
+          "category": "User Action",
+          "type": "Check User Permissions",
+          "trueActions": [
+            {
+              "name": "get kick reason",
+              "category": "Variable",
+              "type": "Store Value in Variable",
+              "messageActionRows": [],
+              "varname": "kickReason",
+              "vartype": "Text",
+              "savevartype": "temp",
+              "param": "1"
+            },
+            {
+              "name": "kick them",
+              "category": "User Action",
+              "type": "Kick User",
+              "messageActionRows": [],
+              "user": "${tempVars.kickUser.id}",
+              "reason": "${tempVars.kickReason}"
+            },
+            {
+              "name": "Log_kick",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "color": "FFFF00",
+              "title": "User Kicked",
+              "url": "",
+              "authorname": "Ceraphim Utilities",
+              "authorimageurl": "${tempVars.kickUser.user.avatarURL}",
+              "authorlink": "",
+              "description": "**Member :** **${tempVars.kickUser.displayName}**\n**Staff :** **${dbsVars.CommandAuthor.displayName}**\n**Reason :** **${tempVars.kickReason}**",
+              "thumbnail": "https://media.discordapp.net/attachments/1098084502787600426/1124300107366531113/kick.png",
+              "image": "",
+              "footer": "",
+              "timestamp": "BOOL_TRUE@@",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            }
+          ],
+          "falseActions": [
+            {
+              "name": "CmdFailDueToPerms_1",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "color": "FF0000",
+              "title": "Command Failed",
+              "url": "",
+              "authorname": "Ceraphim Utilities",
+              "authorimageurl": "${dbsVars.CommandAuthor.user.avatarURL}",
+              "authorlink": "",
+              "description": "You don't have permissions to use this command.",
+              "thumbnail": "https://media.discordapp.net/attachments/1098084502787600426/1124340314455416893/remove.png",
+              "image": "",
+              "footer": "",
+              "timestamp": "BOOL_TRUE@@",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            }
+          ],
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "permissions": []
+        }
+      ]
+    },
+    {
+      "name": "purge",
+      "actions": [
+        {
+          "name": "get count",
+          "category": "Variable",
+          "type": "Store Value in Variable",
+          "messageActionRows": [],
+          "varname": "purgeNumber",
+          "vartype": "Number",
+          "savevartype": "temp",
+          "param": "1"
+        },
+        {
+          "name": "Check Message Manage perms",
+          "category": "User Action",
+          "type": "Check User Permissions",
+          "trueActions": [
+            {
+              "name": "purge messages",
+              "category": "Channel Action",
+              "type": "Delete All Messages",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "msgcount": "${tempVars.purgeNumber}"
+            }
+          ],
+          "falseActions": [
+            {
+              "name": "CmdFailDueToPerms_2",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "color": "FF0000",
+              "title": "Command Failed",
+              "url": "",
+              "authorname": "Ceraphim Utilities",
+              "authorimageurl": "${dbsVars.CommandAuthor.user.avatarURL}",
+              "authorlink": "",
+              "description": "You don't have permissions to use this command.",
+              "thumbnail": "https://media.discordapp.net/attachments/1098084502787600426/1124340314455416893/remove.png",
+              "image": "",
+              "footer": "",
+              "timestamp": "BOOL_TRUE@@",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            }
+          ],
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "permissions": [
+            "MANAGE_MESSAGES"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "trial",
+      "actions": [
+        {
+          "name": "get trial user",
+          "category": "Variable",
+          "type": "Get Mentioned User",
+          "messageActionRows": [],
+          "varname": "trialUser",
+          "vartype": "User",
+          "savevartype": "temp"
+        },
+        {
+          "name": "Check Roles Add/Remove Perms",
+          "category": "User Action",
+          "type": "Check User Permissions",
+          "trueActions": [
+            {
+              "name": "checkTrial",
+              "category": "User Action",
+              "type": "Check If User Has Role",
+              "trueActions": [
+                {
+                  "name": "User already have trial",
+                  "category": "Message",
+                  "type": "Send Embed",
+                  "messageActionRows": [
+                    {
+                      "rowtype": "button",
+                      "buttons": [
+                        {
+                          "label": "Remove Trial",
+                          "customid": "removeTrial",
+                          "style": "DANGER",
+                          "emoji": "",
+                          "URL": "",
+                          "ephemeral": false
+                        }
+                      ]
+                    }
+                  ],
+                  "channelname": "${dbsVars.CommandChannel.id}",
+                  "color": "FF0000",
+                  "title": "Trial Moderator: Error",
+                  "url": "",
+                  "authorname": "Ceraphim Utilities",
+                  "authorimageurl": "",
+                  "authorlink": "",
+                  "description": "**<@${tempVars.trialUser.id}>** already have <@&1123608011378798734>.",
+                  "thumbnail": "${tempVars.trialUser.user.avatarURL}",
+                  "image": "",
+                  "footer": "",
+                  "timestamp": "BOOL_TRUE@@",
+                  "savetovariable": "",
+                  "savetovariabletype": "temp"
+                }
+              ],
+              "falseActions": [
+                {
+                  "name": "add trial to user",
+                  "category": "User Action",
+                  "type": "Add Role to User",
+                  "messageActionRows": [],
+                  "user": "${tempVars.trialUser.id}",
+                  "rolename": "Trial Moderator"
+                },
+                {
+                  "name": "trialLog",
+                  "category": "Message",
+                  "type": "Send Embed",
+                  "messageActionRows": [],
+                  "channelname": "${dbsVars.CommandChannel.id}",
+                  "color": "1B9DE5",
+                  "title": "Trial Moderator",
+                  "url": "",
+                  "authorname": "Ceraphim utilities",
+                  "authorimageurl": "",
+                  "authorlink": "",
+                  "description": "**<@${tempVars.trialUser.id}>** is appointed as:<@&1123608011378798734>.",
+                  "thumbnail": "${tempVars.trialUser.user.avatarURL}",
+                  "image": "",
+                  "footer": "",
+                  "timestamp": "BOOL_TRUE@@",
+                  "savetovariable": "",
+                  "savetovariabletype": "temp"
+                }
+              ],
+              "messageActionRows": [],
+              "user": "${tempVars.trialUser.id}",
+              "role": "Trial Moderator"
+            }
+          ],
+          "falseActions": [],
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "permissions": [
+            "MANAGE_ROLES"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ban",
+      "actions": [
+        {
+          "name": "get user banned",
+          "category": "Variable",
+          "type": "Get Mentioned User",
+          "messageActionRows": [],
+          "varname": "banUser",
+          "vartype": "User",
+          "savevartype": "temp"
+        },
+        {
+          "name": "Check Ban Perms",
+          "category": "User Action",
+          "type": "Check User Permissions",
+          "trueActions": [
+            {
+              "name": "get ban reason",
+              "category": "Variable",
+              "type": "Store Value in Variable",
+              "messageActionRows": [],
+              "varname": "banReason",
+              "vartype": "Text",
+              "savevartype": "temp",
+              "param": "2"
+            },
+            {
+              "name": "get days",
+              "category": "Variable",
+              "type": "Store Value in Variable",
+              "messageActionRows": [],
+              "varname": "banDays",
+              "vartype": "Number",
+              "savevartype": "temp",
+              "param": "3"
+            },
+            {
+              "name": "ban them",
+              "category": "User Action",
+              "type": "Ban User",
+              "messageActionRows": [],
+              "user": "${tempVars.banUser.id}",
+              "reason": "${tempVars.banReason}",
+              "days": "${tempVars.banDays}"
+            },
+            {
+              "name": "Log_ban",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "color": "FFFF00",
+              "title": "User Banned",
+              "url": "",
+              "authorname": "Ceraphim Utilities",
+              "authorimageurl": "${tempVars.banUser.displayName}",
+              "authorlink": "",
+              "description": "**Member :** **${tempVars.banUser.displayName}**\n**Staff :** **${dbsVars.CommandAuthor.displayName}**\n**Reason :** **${tempVars.banReason}**",
+              "thumbnail": "https://media.discordapp.net/attachments/1098084502787600426/1124300107949539388/block-user.png",
+              "image": "",
+              "footer": "",
+              "timestamp": "BOOL_TRUE@@",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            }
+          ],
+          "falseActions": [
+            {
+              "name": "CmdFailDueToPerms",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "color": "FF0000",
+              "title": "Command Failed",
+              "url": "",
+              "authorname": "Ceraphim Utilities",
+              "authorimageurl": "${dbsVars.CommandAuthor.user.avatarURL}",
+              "authorlink": "",
+              "description": "You don't have permissions to use this command.",
+              "thumbnail": "https://media.discordapp.net/attachments/1098084502787600426/1124340314455416893/remove.png",
+              "image": "",
+              "footer": "",
+              "timestamp": "BOOL_TRUE@@",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            }
+          ],
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "permissions": [
+            "BAN_MEMBERS"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "dm",
+      "perms": [],
+      "actions": [
+        {
+          "name": "get user",
+          "category": "Variable",
+          "type": "Get Mentioned User",
+          "messageActionRows": [],
+          "varname": "dmUser",
+          "vartype": "User",
+          "savevartype": "temp"
+        },
+        {
+          "name": "Dm User",
+          "category": "Message",
+          "type": "Send DM",
+          "messageActionRows": [],
+          "msgtype": "msg",
+          "userid": "${tempVars.dmUser.id}",
+          "msg": "YUH",
+          "color": "00FF08",
+          "title": "This is a Embed send in DM by the BOT.",
+          "url": "",
+          "author": "Ceraphim Utilities",
+          "description": "",
+          "thumbnail": "",
+          "image": "",
+          "timestamp": ""
+        },
+        {
+          "name": "Check1",
+          "category": "Message",
+          "type": "Send Message",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "messagetext": "Yuh this message is meant to be sent in the command channel.",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    },
+    {
+      "name": "mute",
+      "actions": [
+        {
+          "name": "get user to mute",
+          "category": "Variable",
+          "type": "Get Mentioned User",
+          "messageActionRows": [],
+          "varname": "muteUser",
+          "vartype": "User",
+          "savevartype": "temp"
+        },
+        {
+          "name": "Check Mute Perms",
+          "category": "User Action",
+          "type": "Check User Permissions",
+          "trueActions": [
+            {
+              "name": "get mute reason",
+              "category": "Variable",
+              "type": "Store Value in Variable",
+              "messageActionRows": [],
+              "varname": "muteReason",
+              "vartype": "Text",
+              "savevartype": "temp",
+              "param": "2"
+            },
+            {
+              "name": "mute them",
+              "category": "User Action",
+              "type": "Add Role to User",
+              "messageActionRows": [],
+              "user": "${tempVars.muteUser.id}",
+              "rolename": "Muted"
+            },
+            {
+              "name": "Remove Member Role",
+              "category": "User Action",
+              "type": "Remove Role From User",
+              "messageActionRows": [],
+              "user": "${tempVars.unmuteUser.id}",
+              "rolename": "╰•★★ Member ★★•╯",
+              "reason": "nuh"
+            },
+            {
+              "name": "Log_muteUser",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "color": "FFFF00",
+              "title": "User Muted",
+              "url": "",
+              "authorname": "Ceraphim Utilities",
+              "authorimageurl": "${dbsVars.CommandAuthor.user.avatarURL}",
+              "authorlink": "",
+              "description": "**User :** **<@${tempVars.muteUser.id}>**\n**Staff :** **<@${dbsVars.CommandAuthor.id}>**\n**Reason :** **${tempVars.muteReason}**",
+              "thumbnail": "https://media.discordapp.net/attachments/1098084502787600426/1124300107647561760/no-speak.png",
+              "image": "",
+              "footer": "",
+              "timestamp": "BOOL_TRUE@@",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            }
+          ],
+          "falseActions": [
+            {
+              "name": "CmdFailDueToPerms_3",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "color": "FF0000",
+              "title": "Command Failed",
+              "url": "",
+              "authorname": "Ceraphim Utilities",
+              "authorimageurl": "${dbsVars.CommandAuthor.user.avatarURL}",
+              "authorlink": "",
+              "description": "You don't have permissions to use this command.",
+              "thumbnail": "https://media.discordapp.net/attachments/1098084502787600426/1124340314455416893/remove.png",
+              "image": "",
+              "footer": "",
+              "timestamp": "BOOL_TRUE@@",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            }
+          ],
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "permissions": [
+            "MUTE_MEMBERS"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "unmute",
+      "perms": [],
+      "actions": [
+        {
+          "name": "get user to unmute",
+          "category": "Variable",
+          "type": "Get Mentioned User",
+          "messageActionRows": [],
+          "varname": "unmuteUser",
+          "vartype": "User",
+          "savevartype": "temp"
+        },
+        {
+          "name": "Check Unmute Perms",
+          "category": "User Action",
+          "type": "Check User Permissions",
+          "trueActions": [
+            {
+              "name": "unmute them",
+              "category": "User Action",
+              "type": "Remove Role From User",
+              "messageActionRows": [],
+              "user": "${tempVars.unmuteUser.id}",
+              "rolename": "Muted",
+              "reason": "nuh"
+            },
+            {
+              "name": "Add Member Role",
+              "category": "User Action",
+              "type": "Add Role to User",
+              "messageActionRows": [],
+              "user": "${tempVars.unmuteUser.id}",
+              "rolename": "╰•★★ Member ★★•╯"
+            },
+            {
+              "name": "Log_unmuteuser",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "color": "03FF03",
+              "title": "User Unmuted",
+              "url": "",
+              "authorname": "Ceraphim Utilities",
+              "authorimageurl": "${dbsVars.CommandAuthor.user.avatarURL}",
+              "authorlink": "",
+              "description": "**User :** **<@${tempVars.unmuteUser.id}>**\n**Staff :** **<@${dbsVars.CommandAuthor.id}>**",
+              "thumbnail": "",
+              "image": "",
+              "footer": "",
+              "timestamp": "BOOL_TRUE@@",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            }
+          ],
+          "falseActions": [
+            {
+              "name": "CmdFailDueToPerms_4",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "color": "FF0000",
+              "title": "Command Failed",
+              "url": "",
+              "authorname": "Ceraphim Utilities",
+              "authorimageurl": "${dbsVars.CommandAuthor.user.avatarURL}",
+              "authorlink": "",
+              "description": "You don't have permissions to use this command.",
+              "thumbnail": "https://media.discordapp.net/attachments/1098084502787600426/1124340314455416893/remove.png",
+              "image": "",
+              "footer": "",
+              "timestamp": "BOOL_TRUE@@",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            }
+          ],
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "permissions": [
+            "MUTE_MEMBERS"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "unban",
+      "actions": [
+        {
+          "name": "get user unbanned",
+          "category": "Variable",
+          "type": "Store Value in Variable",
+          "messageActionRows": [],
+          "varname": "unbanUser",
+          "vartype": "Number",
+          "savevartype": "temp",
+          "param": "1"
+        },
+        {
+          "name": "Check Unban Perms",
+          "category": "User Action",
+          "type": "Check User Permissions",
+          "trueActions": [
+            {
+              "name": "unban them",
+              "category": "User Action",
+              "type": "Unban",
+              "messageActionRows": [],
+              "id": "${tempVars.unbanUser}"
+            },
+            {
+              "name": "Log_unbanuser",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "color": "00FF00",
+              "title": "User Unbanned",
+              "url": "",
+              "authorname": "Ceraphim Utilities",
+              "authorimageurl": "${dbsVars.CommandAuthor.user.avatarURL}",
+              "authorlink": "",
+              "description": "**Member :**${tempVars.unbanUser}**\n**Staff :** **${dbsVars.CommandAuthor.displayName}**\n",
+              "thumbnail": "",
+              "image": "",
+              "footer": "",
+              "timestamp": "false",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            }
+          ],
+          "falseActions": [
+            {
+              "name": "CmdFailDueToPerms_5",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "color": "FF0000",
+              "title": "Command Failed",
+              "url": "",
+              "authorname": "Ceraphim Utilities",
+              "authorimageurl": "${dbsVars.CommandAuthor.user.avatarURL}",
+              "authorlink": "",
+              "description": "You don't have permissions to use this command.",
+              "thumbnail": "https://media.discordapp.net/attachments/1098084502787600426/1124340314455416893/remove.png",
+              "image": "",
+              "footer": "",
+              "timestamp": "BOOL_TRUE@@",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            }
+          ],
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "permissions": [
+            "BAN_MEMBERS"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "warn",
+      "actions": [
+        {
+          "name": "get user to warn",
+          "category": "Variable",
+          "type": "Get Mentioned User",
+          "messageActionRows": [],
+          "varname": "warnUser",
+          "vartype": "User",
+          "savevartype": "temp"
+        },
+        {
+          "name": "Check Warn Perms",
+          "category": "User Action",
+          "type": "Check User Permissions",
+          "trueActions": [
+            {
+              "name": "get warn reason",
+              "category": "Variable",
+              "type": "Store Value in Variable",
+              "messageActionRows": [],
+              "varname": "warnReason",
+              "vartype": "Text",
+              "savevartype": "temp",
+              "param": "2"
+            },
+            {
+              "name": "warn them",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "color": "FF0000",
+              "title": "Warned ${tempVars.warnUser.displayName}",
+              "url": "",
+              "authorname": "Ceraphim Utilities",
+              "authorimageurl": "${dbsVars.CommandAuthor.user.avatarURL}",
+              "authorlink": "",
+              "description": "**User :** **<@${tempVars.warnUser.id}>** was warned by **<@${dbsVars.CommandAuthor.id}>** for **${tempVars.warnReason}**.",
+              "thumbnail": "https://media.discordapp.net/attachments/1098084502787600426/1124611267722747914/risk-management.png",
+              "image": "",
+              "footer": "",
+              "timestamp": "BOOL_TRUE@@",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            },
+            {
+              "name": "Log_warn_DM",
+              "category": "Message",
+              "type": "Send DM",
+              "messageActionRows": [],
+              "msgtype": "embed",
+              "userid": "${tempVars.warnUser.id}",
+              "msg": "",
+              "color": "FF0000",
+              "title": "Your were warned in Ceraphim",
+              "url": "",
+              "author": "Ceraphim Utilities",
+              "description": "**By ** **${dbsVars.CommandAuthor.displayName}** for **${tempVars.warnReason}**.",
+              "thumbnail": "https://media.discordapp.net/attachments/1098084502787600426/1124611267722747914/risk-management.png",
+              "image": "",
+              "timestamp": ""
+            }
+          ],
+          "falseActions": [
+            {
+              "name": "CmdFailDueToPerms_6",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "color": "FF0000",
+              "title": "Command Failed",
+              "url": "",
+              "authorname": "Ceraphim Utilities",
+              "authorimageurl": "${dbsVars.CommandAuthor.user.avatarURL}",
+              "authorlink": "",
+              "description": "You don't have permissions to use this command.",
+              "thumbnail": "https://media.discordapp.net/attachments/1098084502787600426/1124340314455416893/remove.png",
+              "image": "",
+              "footer": "",
+              "timestamp": "BOOL_TRUE@@",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            }
+          ],
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "permissions": [
+            "MANAGE_MESSAGES"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "level",
+      "actions": [
+        {
+          "name": "Get xp",
+          "category": "User Data",
+          "type": "Get User Data",
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "field": "xp",
+          "varname": "xp",
+          "savevartype": "temp",
+          "vartype": "User"
+        },
+        {
+          "name": "Get xp_1",
+          "category": "User Data",
+          "type": "Get User Data",
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "field": "lvl",
+          "varname": "lvl",
+          "savevartype": "temp",
+          "vartype": "User"
+        },
+        {
+          "name": "SendLvL",
+          "category": "Message",
+          "type": "Send Message",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "messagetext": "Level: **${tempVars.lvl}**\nXP: **${tempVars.xp}**",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        },
+        {
+          "name": "SendLevelCard",
+          "category": "Message",
+          "type": "Level Card",
+          "messageActionRows": [],
+          "neededxp": "",
+          "userxp": "${tempVars.xp}",
+          "userlvl": "${tempVars.lvl}",
+          "lvlcolor": "#8feb34",
+          "barcolor": "#8feb34",
+          "bgtype": "COLOR",
+          "bg": "#FFFFFF"
+        }
+      ]
+    },
+    {
+      "name": "bomb",
+      "perms": [
+        "head moderator",
+        "co-owner",
+        "owner",
+        "sr. moderator"
+      ],
+      "actions": [
+        {
+          "name": "delete channel",
+          "category": "Channel Action",
+          "type": "Delete Channel",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "reason": ""
+        },
+        {
+          "name": "copy channel",
+          "category": "Channel Action",
+          "type": "CopyChannel",
+          "messageActionRows": [],
+          "copychannel": "${dbsVars.CommandChannel.id}"
+        }
+      ]
+    },
+    {
+      "name": "smpart",
+      "perms": [
+        "pm",
+        "head moderator",
+        "owner of happiness",
+        "co-owner"
+      ],
+      "actions": [
+        {
+          "name": "get part user",
+          "category": "Variable",
+          "type": "Get Mentioned User",
+          "messageActionRows": [],
+          "varname": "smpartUser",
+          "vartype": "User",
+          "savevartype": "temp"
+        },
+        {
+          "name": "give user smpart",
+          "category": "User Action",
+          "type": "Add Role to User",
+          "messageActionRows": [],
+          "user": "${tempVars.smpartUser.id}",
+          "rolename": "Small Partners"
+        },
+        {
+          "name": "Successful",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "color": "00FF00",
+          "title": "New Partner",
+          "url": "",
+          "authorname": "Ceraphim Utilities",
+          "authorimageurl": "${dbsVars.CommandAuthor.user.avatarURL}",
+          "authorlink": "",
+          "description": "Added  ${tempVars.smpartUser.displayName} to <@&1125044693789573183>.",
+          "thumbnail": "https://media.discordapp.net/attachments/1098084502787600426/1125099780029288509/discordpartner14.PNG",
+          "image": "",
+          "footer": "",
+          "timestamp": "BOOL_TRUE@@",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    },
+    {
+      "name": "bgpart",
+      "perms": [
+        "pm",
+        "head moderator",
+        "owner of happiness",
+        "co-owner"
+      ],
+      "actions": [
+        {
+          "name": "get part user_1",
+          "category": "Variable",
+          "type": "Get Mentioned User",
+          "messageActionRows": [],
+          "varname": "bgpartUser",
+          "vartype": "User",
+          "savevartype": "temp"
+        },
+        {
+          "name": "give user bgpart",
+          "category": "User Action",
+          "type": "Add Role to User",
+          "messageActionRows": [],
+          "user": "${tempVars.bgpartUser.id}",
+          "rolename": "Big Partners"
+        },
+        {
+          "name": "Successful_1",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "color": "00FF00",
+          "title": "New Partner",
+          "url": "",
+          "authorname": "Ceraphim Utilities",
+          "authorimageurl": "${dbsVars.CommandAuthor.user.avatarURL}",
+          "authorlink": "",
+          "description": "Added  ${tempVars.bgpartUser.displayName} to <@&1125044994890276884>.",
+          "thumbnail": "https://media.discordapp.net/attachments/1098084502787600426/1125099779760869426/arpartner.PNG",
+          "image": "",
+          "footer": "",
+          "timestamp": "BOOL_TRUE@@",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    },
+    {
+      "name": "help",
+      "actions": [
+        {
+          "name": "all commands",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "color": "9EFFE5",
+          "title": "**Ceraphim Utilities:** Command List",
+          "url": "",
+          "authorname": "Ceraphim utilities",
+          "authorimageurl": "${dbsVars.CommandAuthor.user.avatarURL}",
+          "authorlink": "",
+          "description": "**Below is a comprehensive list of available commands for <@1124185545350860811>.**\n\n`?help`:** This command displays a helpful message or a list of available commands for users to understand the functionality and usage of the bot.**\n*Usage: `?help`*\n**Allowed Staff:** `All`\n\n`?kick`: **This command allows administrators or users with appropriate permissions to remove or kick a member from the server. It is commonly used to enforce rules or remove disruptive individuals.**\n*Usage: `?kick <@member>`*\n**Allowed Staff:** <@&1114170198908481576>\n\n`?ban`: **With this command, administrators can ban or permanently remove a member from the server. It is usually employed when a member repeatedly violates server rules or engages in severe misconduct.**\n*Usage: `?ban <@member>`*\n**Allowed Staff: **<@&1124655559606534157>, <@&1123603204408623257>\n\n`?unban`:** This command allows administrators to reverse a ban on a member and grant them access back to the server. It is used when a member's ban is considered no longer necessary or if they have learned from their previous actions.**\n*Usage: `?unban <@member>`*\n**Allowed Staff:** <@&1124655559606534157>, <@&1123603204408623257>\n\n`?mute`: **This command enables administrators to mute a member, preventing them from sending messages or participating in voice channels. Muting is often utilized to temporarily silence a member who is causing disturbances or engaging in inappropriate behavior.**\n*Usage: `?mute <@member>`*\n**Allowed Staff:** <@&1124655559606534157>, <@&1123603204408623257>, <@&1123603998407139468>\n\n`?unmute`:** This command is used by administrators to remove the mute status from a previously muted member. It allows the member to regain their ability to send messages and participate in voice channels.**\n*Usage: `?unmute <@member>`*\n**Allowed Staff:**<@&1124655559606534157>, <@&1123603204408623257>, <@&1123603998407139468>\n\n`?purge`:** With this command, administrators can delete a specified number of messages from a text channel. It is commonly employed to clean up chat logs or remove a large number of unwanted messages.**\n*Usage: `?purge <number_of_messages>`*\n**Allowed Staff:** <@&1114170198908481576>\n\n`?trial`: **This command assigns the \"<@&1123608011378798734>\" role to the tagged user, initiating a trial period in the server. The purpose of this command is to grant temporary permissions to assess the member's suitability for a specific role or responsibility, such as moderating the server. During the trial period, the member can exercise the permissions associated with the Trial Moderator role. After the trial period ends, further evaluation or decision-making regarding the member's role may take place based on their performance.**\n*Usage: `?trial <@member>`*\n**Allowed Staff:**<@&1124655559606534157>, <@&1123603204408623257>\n\n`?warn`: **Administrators use this command to issue a warning to a member who has violated server rules or engaged in undesirable behavior. Warnings are often accompanied by an explanation and serve as a formal notification to the member about their actions.**\n*Usage: `?warn <@member> <reason>`*\nAllowed Staff: <@&1114170198908481576>\n\n`?bomb`: **This command typically deletes the channel in which command is used and creates a duplicate channel. Only use in case of raid.**\n*Usage: `?bomb`*\n**Allowed Staff:**<@&1124655559606534157>, <@&1123603204408623257>\n\n`?smpart`:** This command adds the \"<@&1125044693789573183>\" role to the tagged user, designating them as a small partner. It is typically used to recognize and reward smaller partnered entities or individuals in the server.**\n*Usage: `?smpart <@member>`*\n**Allowed Staff:** <@&1123961550877765702>\n\n`?bgpart`: **This command adds the \"<@&1125044994890276884>\" role to the tagged user, designating them as a big partner. It is typically used to recognize and reward larger partnered entities or individuals in the server.**\n*Usage: `?bgpart <@member>`*\n**Allowed Staff:** <@&1123961550877765702>\n",
+          "thumbnail": "https://media.discordapp.net/attachments/1098084502787600426/1125102545711398972/help.png",
+          "image": "",
+          "footer": "",
+          "timestamp": "BOOL_TRUE@@",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    },
+    {
+      "name": "nick",
+      "perms": [
+        "head moderator"
+      ],
+      "actions": [
+        {
+          "name": "get user to set nickname",
+          "category": "Variable",
+          "type": "Get Mentioned User",
+          "messageActionRows": [],
+          "varname": "nickUser",
+          "vartype": "User",
+          "savevartype": "temp"
+        },
+        {
+          "name": "get nickname",
+          "category": "Variable",
+          "type": "Store Value in Variable",
+          "messageActionRows": [],
+          "varname": "nickname",
+          "vartype": "Text",
+          "savevartype": "temp",
+          "param": "2+"
+        },
+        {
+          "name": "set nickname",
+          "category": "User Action",
+          "type": "Set Nickname",
+          "messageActionRows": [],
+          "userid": "${tempVars.nickUser.id}",
+          "nickname": "${tempVars.nickname}"
+        },
+        {
+          "name": "Log_nickUser",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "color": "FFFFFF",
+          "title": "Nickname Changed",
+          "url": "",
+          "authorname": "Ceraphim Utilities",
+          "authorimageurl": "${dbsVars.CommandAuthor.user.avatarURL}",
+          "authorlink": "",
+          "description": "**Changed <@${tempVars.nickUser.id}>'s nickname to ${tempVars.nickname}.**",
+          "thumbnail": "https://media.discordapp.net/attachments/1098084502787600426/1125301076833337344/id-card.png",
+          "image": "",
+          "footer": "",
+          "timestamp": "BOOL_TRUE@@",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    },
+    {
+      "name": "test",
+      "actions": [
+        {
+          "name": "get user to set nickname_1",
+          "category": "Variable",
+          "type": "Get Mentioned User",
+          "messageActionRows": [],
+          "varname": "nickUser",
+          "vartype": "User",
+          "savevartype": "temp"
+        },
+        {
+          "name": "get nickname_1",
+          "category": "Variable",
+          "type": "Store Value in Variable",
+          "messageActionRows": [],
+          "varname": "nickname",
+          "vartype": "Text",
+          "savevartype": "temp",
+          "param": "2"
+        },
+        {
+          "name": "set nickname_1",
+          "category": "User Action",
+          "type": "Set Nickname",
+          "messageActionRows": [],
+          "userid": "${tempVars.nickUser.id}",
+          "nickname": "${tempVars.nickname}"
+        }
+      ]
+    }
+  ]
+}
